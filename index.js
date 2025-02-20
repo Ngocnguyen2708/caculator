@@ -1,22 +1,54 @@
 // program
-function appendToDisplay(value) {
-    const display = document.getElementById('display');
+
+let display = document.getElementById("result");
+
+
+function appendValue(value) {
     display.value += value;
 }
 
+
 function clearDisplay() {
-    document.getElementById('display').value = '';
+    display.value = "";
 }
 
-function calculateResult() {
-    const display = document.getElementById('display');
-    let expression = display.value;
 
+function deleteLastChar() {
+    display.value = display.value.slice(0, -1);
+}
+
+
+function calculateResult() {
     try {
-        expression = expression.replace(/(\d+)%/g, '($1 / 100)');
-        const result = eval(expression);
-        display.value = result;
-    } catch (e) {
-        display.value = 'Lỗi';
+        display.value = eval(display.value.replace("÷", "/").replace("×", "*"));
+    } catch (error) {
+        display.value = "Lỗi";
+    }
+}
+
+
+function toggleSign() {
+    if (display.value) {
+        display.value = String(-parseFloat(display.value));
+    }
+}
+
+function squareRoot() {
+    if (display.value) {
+        display.value = Math.sqrt(parseFloat(display.value));
+    }
+}
+
+
+function squareNumber() {
+    if (display.value) {
+        display.value = Math.pow(parseFloat(display.value), 2);
+    }
+}
+
+
+function reciprocal() {
+    if (display.value) {
+        display.value = 1 / parseFloat(display.value);
     }
 }
